@@ -14,6 +14,7 @@ public:
     Bee(double x, double y, double speed, World& world);
     void make_step() override;
     void find_goal();
+    ~Bee();
 };
 
 #endif //P2_FOREST_15_03_24_BEE_H

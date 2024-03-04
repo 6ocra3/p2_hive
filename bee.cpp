@@ -42,7 +42,6 @@ void Bee::make_step() {
         }
 
         if(get_distance(*goal, *this) <= speed){
-            std::cout << 1;
             x = goal->x;
             y = goal->y;
             inGoal = true;
@@ -88,5 +87,24 @@ void Bee::make_step() {
             }
         }
 
+    }
+}
+
+Bee::~Bee(){
+    auto it = std::find(world.bees.begin(), world.bees.end(), this);
+    if (it != world.bees.end()) {
+        world.bees.erase(it);
+    }
+
+    if (goal != nullptr) {
+        goal->busy = false;
+        goal->bee = nullptr;
+    }
+
+    for(Hornet& hornet : world.hornets){
+        if(hornet.goal == this){
+            hornet.goal = nullptr;
+            hornet.find_goal();
+        }
     }
 }

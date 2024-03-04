@@ -12,8 +12,8 @@ void World::draw_world(sf::RenderWindow& window){
         window.draw(flower.shape);
     }
 
-    for(Bee& bee : bees){
-        window.draw(bee.shape);
+    for(Bee* bee : bees){
+        window.draw(bee->shape);
     }
 
     for(Hornet& hornet : hornets){
@@ -27,8 +27,8 @@ void World::make_step(){
     for(Flower& flower : flowers){
         flower.make_step();
     }
-    for(Bee& bee : bees){
-        bee.make_step();
+    for(Bee* bee : bees){
+        bee->make_step();
     }
     for(Hornet& hornet : hornets){
         hornet.make_step();
@@ -45,4 +45,8 @@ void World::make_step(){
     for(Flower& flower : toAddFlowers){
         flowers.push_back(flower);
     }
+}
+
+void World::removeBee(Bee* bee) {
+    delete bee;
 }
