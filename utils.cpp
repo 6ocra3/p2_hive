@@ -11,9 +11,9 @@ inline double get_distance(Entity& first, Entity& second){
 
 inline int randint(int start, int end){
     std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> distrib(start, end);
+    static std::mt19937 gen(rd());
+//    static std::mt19937 gen(126);
 
-    int random_number = distrib(gen);
-    return random_number;
+    std::uniform_int_distribution<> distrib(start, end);
+    return distrib(gen); // Используем глобальный генератор
 }

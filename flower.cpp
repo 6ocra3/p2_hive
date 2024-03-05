@@ -16,7 +16,7 @@ void Flower::make_step() {
             shape.setFillColor(sf::Color(0, greenCnt, 0));
             int xDif = randint(1, 100) - 50;
             int yDif = randint(1, 100) - 50;
-            Flower flower(x + xDif, y + yDif, 0, world);
+            Flower* flower = new Flower(x + xDif, y + yDif, 0, world);
             world.toAddFlowers.push_back(flower);
         } else if (capacity < 10 && !busy) {
             capacity++;

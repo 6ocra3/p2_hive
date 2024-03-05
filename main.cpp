@@ -5,42 +5,41 @@
 #include "hornet.h"
 #include <vector>
 #include "utils.cpp"
-
+#include "iostream"
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(640, 480), "SFML Application");
 
-    std::vector<Flower> flowers;
-
     World world;
 
-    for(int i = 0; i<12;i++){
+    for(int i = 0; i<20;i++){
         int x = randint(40, 600);
         int y = randint(40, 440);
         int speed = 0;
-        Flower flower(x, y, speed, world);
+        Flower* flower = new Flower(x, y, speed, world);
         world.flowers.push_back(flower);
     }
-    for(int i = 0; i<3;i++){
+    for(int i = 0; i<8;i++){
         int x = randint(40, 600);
         int y = randint(40, 440);
         double speed = randint(1, 8) / 10 + 1;
-        speed = 2;
-        Bee bee(x, y, speed, world);
+        speed = 6;
+        Bee* bee = new Bee(x, y, speed, world);
         world.bees.push_back(bee);
     }
 
-    for(int i = 0; i<10;i++){
+    for(int i = 0; i<4;i++){
         int x = randint(40, 600);
         int y = randint(40, 440);
         double speed = randint(1, 8) / 10 + 0.6;
+        speed = 4;
         Hornet bee(x, y, speed, world);
         world.hornets.push_back(bee);
     }
 
 
 
-    sf::Clock clock; // Создаем таймер
+    sf::Clock clock;
 
     while (window.isOpen())
     {
@@ -52,7 +51,7 @@ int main()
                 window.close();
         }
 
-        if (clock.getElapsedTime().asSeconds() >= 0.03f)
+        if (clock.getElapsedTime().asSeconds() >= 0.06f)
         {
             world.make_step();
             clock.restart();

@@ -9,11 +9,15 @@ Bee::Bee(double x, double y, double speed, World& world): Entity(x, y, speed, wo
         false){}
 
 void Bee::find_goal(){
+    if(this->goal != nullptr){
+        this->goal->bee = nullptr;
+        this->goal = nullptr;
+    }
     std::vector < std::pair< double, Flower*  > > closestFlowers;
-    for(Flower& flower : world.flowers){
+    for(Flower* flower : world.flowers){
         std::pair< double, Flower* > newPair;
-        newPair.first = get_distance(*this, flower);
-        newPair.second = &flower;
+        newPair.first = get_distance(*this, *flower);
+        newPair.second = flower;
         closestFlowers.push_back(newPair);
     }
 
@@ -28,7 +32,9 @@ void Bee::find_goal(){
             this->goal = closestFlower.second;
             Bee* prevBee = closestFlower.second->bee;
             this->goal->bee = this;
+            prevBee->goal = nullptr;
             prevBee->find_goal();
+            return;
         }
     }
 
@@ -42,7 +48,6 @@ void Bee::make_step() {
         }
 
         if(get_distance(*goal, *this) <= speed){
-            std::cout << 1;
             x = goal->x;
             y = goal->y;
             inGoal = true;
@@ -88,5 +93,24 @@ void Bee::make_step() {
             }
         }
 
+    }
+}
+
+Bee::~Bee(){
+    auto it = std::find(world.bees.begin(), world.bees.end(), this);
+    if (it != world.bees.end()) {
+        world.bees.erase(it);
+    }
+
+    if (goal != nullptr) {
+        goal->busy = false;
+        goal->bee = nullptr;
+    }
+
+    for(Hornet& hornet : world.hornets){
+        if(hornet.goal == this){
+            hornet.goal = nullptr;
+            hornet.find_goal();
+        }
     }
 }
