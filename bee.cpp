@@ -9,11 +9,15 @@ Bee::Bee(double x, double y, double speed, World& world): Entity(x, y, speed, wo
         false){}
 
 void Bee::find_goal(){
+    if(this->goal != nullptr){
+        this->goal->bee = nullptr;
+        this->goal = nullptr;
+    }
     std::vector < std::pair< double, Flower*  > > closestFlowers;
-    for(Flower& flower : world.flowers){
+    for(Flower* flower : world.flowers){
         std::pair< double, Flower* > newPair;
-        newPair.first = get_distance(*this, flower);
-        newPair.second = &flower;
+        newPair.first = get_distance(*this, *flower);
+        newPair.second = flower;
         closestFlowers.push_back(newPair);
     }
 
@@ -28,7 +32,9 @@ void Bee::find_goal(){
             this->goal = closestFlower.second;
             Bee* prevBee = closestFlower.second->bee;
             this->goal->bee = this;
+            prevBee->goal = nullptr;
             prevBee->find_goal();
+            return;
         }
     }
 

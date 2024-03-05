@@ -10,8 +10,8 @@
 
 class World{
 public:
-    std::vector< Flower > toAddFlowers;
-    std::vector< Flower > flowers;
+    std::vector< Flower* > toAddFlowers;
+    std::vector< Flower* > flowers;
     std::vector< Bee* > bees;
     std::vector< Hornet > hornets;
     int stepNumber;

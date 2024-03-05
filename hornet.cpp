@@ -29,7 +29,7 @@ void Hornet::make_step() {
     else{
         stepAttacks = 0;
     }
-    if(stepAttacks == 6){
+    if(stepAttacks == 10){
         world.removeBee(goal);
     }
 
