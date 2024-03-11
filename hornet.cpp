@@ -32,7 +32,6 @@ void Hornet::make_step() {
     if(stepAttacks == 10){
         world.removeBee(goal);
     }
-
     double dx = goal->x - this->x;
     double dy = goal->y - this->y;
 

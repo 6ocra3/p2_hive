@@ -15,10 +15,12 @@ void Bee::find_goal(){
     }
     std::vector < std::pair< double, Flower*  > > closestFlowers;
     for(Flower* flower : world.flowers){
-        std::pair< double, Flower* > newPair;
-        newPair.first = get_distance(*this, *flower);
-        newPair.second = flower;
-        closestFlowers.push_back(newPair);
+        if(flower->capacity > 0){
+            std::pair< double, Flower* > newPair;
+            newPair.first = get_distance(*this, *flower);
+            newPair.second = flower;
+            closestFlowers.push_back(newPair);
+        }
     }
 
     std::sort( closestFlowers.begin(), closestFlowers.end() );
