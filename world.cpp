@@ -5,7 +5,7 @@
 #include <algorithm>
 #include "iostream"
 
-World::World(): stepNumber(0) {
+World::World(int width, int height): stepNumber(0), width(width), height(height) {
 
 }
 

@@ -12,7 +12,7 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(640, 480), "SFML Application");
 
-    World world;
+    World world(640, 480);
 
     int x = randint(40, 600);
     int y = randint(40, 440);

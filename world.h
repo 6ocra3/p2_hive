@@ -17,7 +17,9 @@ public:
     std::vector< Hornet > hornets;
     int stepNumber;
     std::vector< Hive* > hives;
-    World();
+    int width;
+    int height;
+    World(int width, int height);
     void draw_world(sf::RenderWindow& window);
     void make_step();
     void removeBee(Bee* bee);
