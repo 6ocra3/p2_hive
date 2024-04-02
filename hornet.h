@@ -13,7 +13,11 @@ public:
     Hornet(double x, double y, double speed, World& world);
     void find_goal();
     void make_step() override;
+    void go_to(Entity& first);
     int stepAttacks;
+    Hive* hive;
+    bool inhive;
+    int taken;
 };
 
 #endif //P2_FOREST_15_03_24_HORNET_H

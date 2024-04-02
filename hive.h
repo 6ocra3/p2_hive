@@ -10,9 +10,11 @@
 class World;
 class Hive: public Entity{
 public:
-    Hive(double x, double y, double speed, World& world);
+    Hive(double x, double y, double speed, World& world,sf::Color color,int needed);
     void make_step() override;
-    long long honey = 0;
+    virtual void spawn() = 0;
+    long long resourses = 0;
+    long long needed = 0;
 private:
 
 };

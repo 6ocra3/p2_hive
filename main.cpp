@@ -5,6 +5,8 @@
 #include "hornet.h"
 #include <vector>
 #include "utils.cpp"
+#include "beehive.h"
+#include "hornethive.h"
 #include "iostream"
 int main()
 {
@@ -16,8 +18,15 @@ int main()
         int x = randint(40, 600);
         int y = randint(40, 440);
         double speed = 0;
-        Hive* hive = new Hive(x,y,speed,world);
-        world.hives.push_back(hive);
+        Hive* bhive = new Beehive(x,y,speed,world,sf::Color::Cyan,10);
+        world.hives.push_back(bhive);
+    }
+    for(int i =0;i<1;++i){
+        int x = randint(40, 600);
+        int y = randint(40, 440);
+        double speed = 0;
+        Hive* horthive = new Hornethive(x,y,speed,world,sf::Color::Magenta,10);
+        world.hives.push_back(horthive);
     }
 
     for(int i = 0; i<20;i++){
