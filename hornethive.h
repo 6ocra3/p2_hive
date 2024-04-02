@@ -12,7 +12,7 @@
 class Hornethive: public Hive{
 public:
     void spawn() override{
-        Hornet hornet = Hornet(this->x, this->y, 8, world);
+        Hornet hornet = Hornet(this->x, this->y, 8, world,*this);
         world.hornets.push_back(hornet);
     }
     Hornethive(double x, double y, double speed, World& world,sf::Color color,int needed);

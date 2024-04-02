@@ -12,14 +12,14 @@ public:
     Flower* goal;
     bool inGoal;
     int taken;
-    Hive* hive;
     bool inHive;
-    Bee(double x, double y, double speed, World& world);
+    Bee(double x, double y, double speed, World& world,Hive& hive);
+    Hive* hive;
     void make_step() override;
     void find_goal();
     void go_to(Entity& first);
     bool set_status(Entity& first);
-    void harvest(Flower& first);
+    void harvest();
     ~Bee();
 };
 

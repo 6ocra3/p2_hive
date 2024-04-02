@@ -6,8 +6,8 @@
 #include <iostream>
 #include "vector"
 #include "beehive.h"
-Bee::Bee(double x, double y, double speed, World& world): Entity(x, y, speed, world, sf::Color::Yellow), goal(nullptr), taken(0), inGoal(
-        false),inHive(false),hive(world.hives[0]){}
+Bee::Bee(double x, double y, double speed, World& world,Hive& hive): Entity(x, y, speed, world, sf::Color::Yellow), goal(nullptr), taken(0), inGoal(
+        false),inHive(false),hive(&hive){}
 void Bee::find_goal(){
     if(this->goal != nullptr){
         this->goal->bee = nullptr;
@@ -65,16 +65,16 @@ bool Bee::set_status(Entity& first) {
     return true;
 }
 
-void Bee::harvest(Flower &first) {
-    if(first.capacity > 0){
+void Bee::harvest() {
+    if(goal->capacity > 0){
         this->taken++;
-        first.capacity -= 1;
-        first.greenCnt -= 10;
-        first.shape.setFillColor(sf::Color(0, first.greenCnt, 0));
+        goal->capacity -= 1;
+        goal->greenCnt -= 10;
+        goal->shape.setFillColor(sf::Color(0, goal->greenCnt, 0));
     }
-    if(first.capacity == 0){
-        first.bee = nullptr;
-        this->goal = nullptr;
+    if(goal->capacity == 0){
+        goal->bee = nullptr;
+        goal = nullptr;
         this->inGoal = false;
         this->shape.setRadius(10.f);
         this->shape.setFillColor(sf::Color::Yellow);
@@ -124,7 +124,7 @@ void Bee::make_step() {
     }
     else{
         if(world.stepNumber % 10 == 0){
-            harvest(*goal);
+            harvest();
         }
     }
 }

@@ -14,20 +14,17 @@ int main()
 
     World world;
 
-    for(int i =0;i<1;++i){
-        int x = randint(40, 600);
-        int y = randint(40, 440);
-        double speed = 0;
-        Hive* bhive = new Beehive(x,y,speed,world,sf::Color::Cyan,10);
-        world.hives.push_back(bhive);
-    }
-    for(int i =0;i<1;++i){
-        int x = randint(40, 600);
-        int y = randint(40, 440);
-        double speed = 0;
-        Hive* horthive = new Hornethive(x,y,speed,world,sf::Color::Magenta,10);
-        world.hives.push_back(horthive);
-    }
+    int x = randint(40, 600);
+    int y = randint(40, 440);
+    double speed = 0;
+    Hive* bhive = new Beehive(x,y,speed,world,sf::Color::Cyan,10);
+    world.hives.push_back(bhive);
+
+    x = randint(40, 600);
+    y = randint(40, 440);
+    speed = 0;
+    Hive* horthive = new Hornethive(x,y,speed,world,sf::Color::Magenta,10);
+    world.hives.push_back(horthive);
 
     for(int i = 0; i<20;i++){
         int x = randint(40, 600);
@@ -41,18 +38,16 @@ int main()
         int y = randint(40, 440);
         double speed = randint(1, 8) / 10 + 1;
         speed = 6;
-        Bee* bee = new Bee(x, y, speed, world);
+        Bee* bee = new Bee(x, y, speed, world,*bhive);
         world.bees.push_back(bee);
     }
-
-
 
     for(int i = 0; i<2;i++){
         int x = randint(40, 600);
         int y = randint(40, 440);
         double speed = randint(1, 8) / 10 + 0.6;
         speed = 4;
-        Hornet bee(x, y, speed, world);
+        Hornet bee(x, y, speed, world,*horthive);
         world.hornets.push_back(bee);
     }
 

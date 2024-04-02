@@ -12,7 +12,7 @@
 class Beehive: public Hive{
 public:
     void spawn() override{
-        Bee* bee = new Bee(this->x, this->y, 5, world);
+        Bee* bee = new Bee(this->x, this->y, 5, world, *this);
         world.bees.push_back(bee);
     }
 

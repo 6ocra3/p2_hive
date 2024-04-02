@@ -10,12 +10,12 @@ class Bee;
 class Hornet: public Entity{
 public:
     Bee* goal;
-    Hornet(double x, double y, double speed, World& world);
+    Hornet(double x, double y, double speed, World& world,Hive& hive);
     void find_goal();
     void make_step() override;
     void go_to(Entity& first);
-    int stepAttacks;
     Hive* hive;
+    int stepAttacks;
     bool inhive;
     int taken;
 };
