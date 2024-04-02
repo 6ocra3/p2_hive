@@ -10,6 +10,10 @@ World::World(int width, int height): stepNumber(0), width(width), height(height)
 }
 
 void World::draw_world(sf::RenderWindow& window){
+    for(Hive* hive:hives){
+        window.draw(hive->shape);
+    }
+
     for(Flower* flower : flowers){
         window.draw(flower->shape);
     }
@@ -26,19 +30,22 @@ void World::draw_world(sf::RenderWindow& window){
 void World::make_step(){
     stepNumber++;
     toAddFlowers.clear();
-    std::cout << "Make step: " << stepNumber << "\n";
+//    std::cout << "Make step: " << stepNumber << "\n";
+    for(Hive* hive:hives){
+        hive->make_step();
+    }
     for(Flower* flower : flowers){
         flower->make_step();
     }
-    std::cout << "Flowers have stepped. Flowers left: " << flowers.size() << "\n";
+//    std::cout << "Flowers have stepped. Flowers left: " << flowers.size() << "\n";
     for(Bee* bee : bees){
         bee->make_step();
     }
-    std::cout << "Bees have stepped. Bees left: " << bees.size() << "\n";
+//    std::cout << "Bees have stepped. Bees left: " << bees.size() << "\n";
     for(Hornet& hornet : hornets){
         hornet.make_step();
     }
-    std::cout << "Hornets have stepped. Hornets left: " << hornets.size() << "\n";
+//    std::cout << "Hornets have stepped. Hornets left: " << hornets.size() << "\n";
     for(Flower* flower : flowers){
         if(flower->capacity != 0){
             toAddFlowers.push_back(flower);
@@ -49,8 +56,8 @@ void World::make_step(){
     for(Flower* flower : toAddFlowers){
         flowers.push_back(flower);
     }
-    std::cout << "Flowers have been added. Flowers after add: " << flowers.size() << "\n";
-    std::cout << stepNumber << " Step finished\n\n\n";
+//    std::cout << "Flowers have been added. Flowers after add: " << flowers.size() << "\n";
+//    std::cout << stepNumber << " Step finished\n\n\n";
 }
 
 void World::removeBee(Bee* bee) {

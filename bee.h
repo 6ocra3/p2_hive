@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "entity.h"
+#include "hive.h"
 
 class World;
 class Flower;
@@ -11,9 +12,14 @@ public:
     Flower* goal;
     bool inGoal;
     int taken;
-    Bee(double x, double y, double speed, World& world);
+    bool inHive;
+    Bee(double x, double y, double speed, World& world,Hive& hive);
+    Hive* hive;
     void make_step() override;
     void find_goal();
+    void go_to(Entity& first);
+    bool set_status(Entity& first);
+    void harvest();
     ~Bee();
 };
 

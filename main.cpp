@@ -5,6 +5,8 @@
 #include "hornet.h"
 #include <vector>
 #include "utils.cpp"
+#include "beehive.h"
+#include "hornethive.h"
 #include "iostream"
 int main()
 {
@@ -12,28 +14,40 @@ int main()
 
     World world(640, 480);
 
-    for(int i = 0; i<30;i++){
+    int x = randint(40, 600);
+    int y = randint(40, 440);
+    double speed = 0;
+    Hive* bhive = new Beehive(x,y,speed,world,sf::Color::Cyan,10);
+    world.hives.push_back(bhive);
+
+    x = randint(40, 600);
+    y = randint(40, 440);
+    speed = 0;
+    Hive* horthive = new Hornethive(x,y,speed,world,sf::Color::Magenta,10);
+    world.hives.push_back(horthive);
+
+    for(int i = 0; i<20;i++){
         int x = randint(40, 600);
         int y = randint(40, 440);
         int speed = 0;
         Flower* flower = new Flower(x, y, speed, world);
         world.flowers.push_back(flower);
     }
-    for(int i = 0; i<7;i++){
+    for(int i = 0; i<6;i++){
         int x = randint(40, 600);
         int y = randint(40, 440);
         double speed = randint(1, 8) / 10 + 1;
         speed = 6;
-        Bee* bee = new Bee(x, y, speed, world);
+        Bee* bee = new Bee(x, y, speed, world,*bhive);
         world.bees.push_back(bee);
     }
 
-    for(int i = 0; i<3;i++){
+    for(int i = 0; i<2;i++){
         int x = randint(40, 600);
         int y = randint(40, 440);
         double speed = randint(1, 8) / 10 + 0.6;
-        speed = 3;
-        Hornet bee(x, y, speed, world);
+        speed = 4;
+        Hornet bee(x, y, speed, world,*horthive);
         world.hornets.push_back(bee);
     }
 

@@ -3,6 +3,7 @@
 #include "flower.h"
 #include "bee.h"
 #include "hornet.h"
+#include "hive.h"
 #ifndef P2_FOREST_15_03_24_WORLD_H
 #define P2_FOREST_15_03_24_WORLD_H
 
@@ -15,6 +16,7 @@ public:
     std::vector< Bee* > bees;
     std::vector< Hornet > hornets;
     int stepNumber;
+    std::vector< Hive* > hives;
     int width;
     int height;
     World(int width, int height);
