@@ -14,7 +14,7 @@ public:
     std::vector< Flower* > toAddFlowers;
     std::vector< Flower* > flowers;
     std::vector< Bee* > bees;
-    std::vector< Hornet > hornets;
+    std::vector< Hornet* > hornets;
     int stepNumber;
     std::vector< Hive* > hives;
     int width;

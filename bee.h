@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "entity.h"
 #include "hive.h"
+#include "hornet.h"
 
 class World;
 class Flower;
@@ -15,11 +16,15 @@ public:
     bool inHive;
     Bee(double x, double y, double speed, World& world,Hive& hive);
     Hive* hive;
+    Hornet* closest;
     void make_step() override;
     void find_goal();
     void go_to(Entity& first);
     bool set_status(Entity& first);
     void harvest();
+    void escape();
+    long danger_check();
+    long indanger = 0;
     ~Bee();
 };
 
