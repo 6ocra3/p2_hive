@@ -38,46 +38,68 @@ void Hornet::go_to(Entity &first) {
 }
 
 void Hornet::make_step() {
-    if((this->taken>=10)or(this->inhive)){
-        if(inhive){
-            if (world.stepNumber % 2 == 0) {
-                if (this->taken > 0) {
-                    taken -= 1;
-                    hive->resourses+=1;
+    if(this->starve < 120){
+        if((this->taken>=10)or(this->inhive)){
+            if(inhive){
+                if (world.stepNumber % 2 == 0) {
+                    if (this->taken > 0) {
+                        taken -= 1;
+                        hive->resourses+=1;
+                    }
+                    if (taken == 0) {
+                        this->find_goal();
+                        this->inhive = false;
+                        shape.setRadius(10.f);
+                        shape.setFillColor(sf::Color::Red);
+                        shape.setOutlineThickness(0);
+                        this->starve = 0;
+                    }
                 }
-                if (taken == 0) {
-                    this->find_goal();
-                    this->inhive = false;
+            }
+            else{
+                if(get_distance(*this,*hive)<=speed){
+                    inhive = true;
                     shape.setRadius(10.f);
                     shape.setFillColor(sf::Color::Red);
                     shape.setOutlineThickness(0);
                 }
+                else{
+                    this->go_to(*hive);
+                }
             }
         }
         else{
-            if(get_distance(*this,*hive)<=speed){
-                inhive = true;
-                shape.setRadius(10.f);
-                shape.setFillColor(sf::Color::Red);
-                shape.setOutlineThickness(0);
+            this->find_goal();
+            if(get_distance(*this, *goal) < 15){
+                stepAttacks++;
             }
             else{
-                this->go_to(*hive);
+                stepAttacks = 0;
             }
+            if(stepAttacks == 10){
+                this->taken+=10;
+                world.removeBee(goal);
+                this->starve=0;
+            }
+            this->go_to(*goal);
+            starve+=2;
         }
     }
     else{
-        this->find_goal();
-        if(get_distance(*this, *goal) < 15){
-            stepAttacks++;
-        }
-        else{
-            stepAttacks = 0;
-        }
-        if(stepAttacks == 10){
-            this->taken+=10;
-            world.removeBee(goal);
-        }
-        this->go_to(*goal);
+        world.removeHornet(this);
     }
+}
+
+Hornet::~Hornet(){
+    auto it = std::find(world.hornets.begin(), world.hornets.end(), this);
+    if (it != world.hornets.end()) {
+        world.hornets.erase(it);
+    }
+
+    for(Bee* bee : world.bees){
+        if(bee->closest == this){
+            bee->closest= nullptr;
+        }
+    }
+
 }

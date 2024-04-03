@@ -18,6 +18,8 @@ public:
     int stepAttacks;
     bool inhive;
     int taken;
+    long starve = 0;
+    ~Hornet();
 };
 
 #endif //P2_FOREST_15_03_24_HORNET_H

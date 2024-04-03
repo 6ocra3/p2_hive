@@ -23,6 +23,7 @@ public:
     void draw_world(sf::RenderWindow& window);
     void make_step();
     void removeBee(Bee* bee);
+    void removeHornet(Hornet* hornet);
 };
 
 #endif //P2_FOREST_15_03_24_WORLD_H
