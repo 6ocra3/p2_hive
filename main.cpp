@@ -26,14 +26,14 @@ int main()
     Hive* horthive = new Hornethive(x,y,speed,world,sf::Color::Magenta,10);
     world.hives.push_back(horthive);
 
-    for(int i = 0; i<20;i++){
+    for(int i = 0; i<35;i++){
         int x = randint(40, 600);
         int y = randint(40, 440);
         int speed = 0;
         Flower* flower = new Flower(x, y, speed, world);
         world.flowers.push_back(flower);
     }
-    for(int i = 0; i<8;i++){
+    for(int i = 0; i<16;i++){
         int x = randint(40, 600);
         int y = randint(40, 440);
         double speed = randint(1, 8) / 10 + 1;
@@ -46,7 +46,7 @@ int main()
         int x = randint(40, 600);
         int y = randint(40, 440);
         double speed = randint(1, 8) / 10 + 0.6;
-        speed = 3;
+        speed = 6.5;
         Hornet* hornet= new Hornet(x, y, speed, world,*horthive);
         world.hornets.push_back(hornet);
     }
@@ -65,7 +65,7 @@ int main()
                 window.close();
         }
 
-        if (clock.getElapsedTime().asSeconds() >= 0.06f)
+        if (clock.getElapsedTime().asSeconds() >= 0.006f)
         {
             world.make_step();
             clock.restart();

@@ -31,7 +31,7 @@ void World::make_step(){
     stepNumber++;
     toAddFlowers.clear();
     std::cout << "Make step: " << stepNumber << "\n";
-    if(stepNumber==61){
+    if(stepNumber==490){
         std::cout<<"1";
     }
     for(Hive* hive:hives){
@@ -41,12 +41,16 @@ void World::make_step(){
         flower->make_step();
     }
 //    std::cout << "Flowers have stepped. Flowers left: " << flowers.size() << "\n";
-    for(Hornet* hornet : hornets){
-        hornet->make_step();
-    }
 
     for(Bee* bee : bees){
         bee->make_step();
+    }
+//
+//    for(int i = 0; i<hornets.size();i++){
+//        hornets[i]->make_step();
+//    }
+    for(Hornet* hornet : hornets){
+        hornet->make_step();
     }
 //    std::cout << "Bees have stepped. Bees left: " << bees.size() << "\n";
 

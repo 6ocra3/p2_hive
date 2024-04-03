@@ -70,7 +70,7 @@ void Bee::harvest() {
 }
 
 void Bee::escape() {
-    long a = danger_check();
+//    long a = danger_check();
     double dx = this->closest->x - this->x;
     double dy = this->closest->y - this->y;
 
@@ -101,9 +101,10 @@ long Bee::danger_check() {
 }
 
 void Bee::make_step() {
-    std::cout<<"taken: "<<taken<<"\n";
+
     if(this->indanger!=0){
         this->indanger-=1;
+//        long a = danger_check();
         go_to(*closest, -1);
     }
     else{

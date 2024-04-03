@@ -38,7 +38,7 @@ void Hornet::find_goal(){
 //}
 
 void Hornet::make_step() {
-    if(this->starve < 120){
+    if(this->starve < 80){
         if((this->taken>=10)or(this->inhive)){
             if(inhive){
                 if (world.stepNumber % 2 == 0) {
@@ -82,7 +82,7 @@ void Hornet::make_step() {
                 this->starve=0;
             }
             this->go_to(*goal);
-            starve+=2;
+            this->starve+=2;
         }
     }
     else{
@@ -99,6 +99,7 @@ Hornet::~Hornet(){
     for(Bee* bee : world.bees){
         if(bee->closest == this){
             bee->closest= nullptr;
+            bee->indanger=0;
         }
     }
 
