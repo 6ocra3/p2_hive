@@ -33,7 +33,7 @@ int main()
         Flower* flower = new Flower(x, y, speed, world);
         world.flowers.push_back(flower);
     }
-    for(int i = 0; i<10;i++){
+    for(int i = 0; i<8;i++){
         int x = randint(40, 600);
         int y = randint(40, 440);
         double speed = randint(1, 8) / 10 + 1;
@@ -42,11 +42,11 @@ int main()
         world.bees.push_back(bee);
     }
 
-    for(int i = 0; i<6;i++){
+    for(int i = 0; i<5;i++){
         int x = randint(40, 600);
         int y = randint(40, 440);
         double speed = randint(1, 8) / 10 + 0.6;
-        speed = 8;
+        speed = 3;
         Hornet* hornet= new Hornet(x, y, speed, world,*horthive);
         world.hornets.push_back(hornet);
     }

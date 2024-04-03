@@ -70,6 +70,7 @@ void Bee::harvest() {
 }
 
 void Bee::escape() {
+    long a = danger_check();
     double dx = this->closest->x - this->x;
     double dy = this->closest->y - this->y;
 
