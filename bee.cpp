@@ -8,6 +8,7 @@
 #include "beehive.h"
 Bee::Bee(double x, double y, double speed, World& world,Hive& hive): Entity(x, y, speed, world, sf::Color::Yellow), goal(nullptr), taken(0), inGoal(
         false),inHive(false),hive(&hive){}
+
 void Bee::find_goal(){
     if(this->goal != nullptr){
         this->goal->bee = nullptr;
@@ -38,22 +39,6 @@ void Bee::find_goal(){
             return;
         }
     }
-}
-void Bee::go_to(Entity& first){
-    double dx = first.x - this->x;
-    double dy = first.y - this->y;
-
-    double length = sqrt(dx * dx + dy * dy);
-    double dx_normalized = dx / length;
-    double dy_normalized = dy / length;
-
-    double stepX = dx_normalized * this->speed;
-    double stepY = dy_normalized * this->speed;
-
-    this->x += stepX;
-    this->y += stepY;
-
-    this->shape.move(stepX, stepY);
 }
 
 bool Bee::set_status(Entity& first) {
@@ -118,7 +103,7 @@ void Bee::make_step() {
     std::cout<<"taken: "<<taken<<"\n";
     if(this->indanger!=0){
         this->indanger-=1;
-        escape();
+        go_to(*closest, -1);
     }
     else{
         if(danger_check()<=75){
@@ -179,6 +164,7 @@ void Bee::make_step() {
 }
 
 Bee::~Bee(){
+
     auto it = std::find(world.bees.begin(), world.bees.end(), this);
     if (it != world.bees.end()) {
         world.bees.erase(it);

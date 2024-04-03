@@ -14,6 +14,8 @@ public:
     sf::CircleShape shape;
     Entity(double x, double y, double speed, World& world, sf::Color color);
 
+    void go_to(Entity& target, int pos=1);
+
     virtual void make_step() = 0;
 
     virtual ~Entity() {}

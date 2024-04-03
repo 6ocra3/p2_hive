@@ -13,7 +13,6 @@ public:
     Hornet(double x, double y, double speed, World& world,Hive& hive);
     void find_goal();
     void make_step() override;
-    void go_to(Entity& first);
     Hive* hive;
     int stepAttacks;
     bool inhive;

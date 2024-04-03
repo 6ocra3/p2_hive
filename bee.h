@@ -19,7 +19,6 @@ public:
     Hornet* closest;
     void make_step() override;
     void find_goal();
-    void go_to(Entity& first);
     bool set_status(Entity& first);
     void harvest();
     void escape();

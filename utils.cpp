@@ -2,11 +2,20 @@
 #include "flower.h"
 #include "entity.h"
 #include <random>
+#include "world.h"
 
 inline double get_distance(Entity& first, Entity& second){
-    double x = first.x - second.x;
-    double y = first.y - second.y;
-    return sqrt((x*x) + (y*y));
+    double dx = fabs(first.x - second.x);
+    double dy = fabs(first.y - second.y);
+
+    if (dx > first.world.width / 2.0) {
+        dx = first.world.width - dx;
+    }
+    if (dy > first.world.height / 2.0) {
+        dy = first.world.height - dy;
+    }
+
+    return sqrt(dx * dx + dy * dy);
 }
 
 inline int randint(int start, int end){

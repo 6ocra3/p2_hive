@@ -20,22 +20,22 @@ void Hornet::find_goal(){
     }
 }
 
-void Hornet::go_to(Entity &first) {
-    double dx = first.x - this->x;
-    double dy = first.y - this->y;
-
-    double length = sqrt(dx * dx + dy * dy);
-    double dx_normalized = dx / length;
-    double dy_normalized = dy / length;
-
-    double stepX = dx_normalized * this->speed;
-    double stepY = dy_normalized * this->speed;
-
-    this->x += stepX;
-    this->y += stepY;
-
-    this->shape.move(stepX, stepY);
-}
+//void Hornet::go_to(Entity &first) {
+//    double dx = first.x - this->x;
+//    double dy = first.y - this->y;
+//
+//    double length = sqrt(dx * dx + dy * dy);
+//    double dx_normalized = dx / length;
+//    double dy_normalized = dy / length;
+//
+//    double stepX = dx_normalized * this->speed;
+//    double stepY = dy_normalized * this->speed;
+//
+//    this->x += stepX;
+//    this->y += stepY;
+//
+//    this->shape.move(stepX, stepY);
+//}
 
 void Hornet::make_step() {
     if((this->taken>=10)or(this->inhive)){
