@@ -22,8 +22,8 @@ void World::draw_world(sf::RenderWindow& window){
         window.draw(bee->shape);
     }
 
-    for(Hornet& hornet : hornets){
-        window.draw(hornet.shape);
+    for(Hornet* hornet : hornets){
+        window.draw(hornet->shape);
     }
 }
 
@@ -45,8 +45,8 @@ void World::make_step(){
         bee->make_step();
     }
 //    std::cout << "Bees have stepped. Bees left: " << bees.size() << "\n";
-    for(Hornet& hornet : hornets){
-        hornet.make_step();
+    for(Hornet* hornet : hornets){
+        hornet->make_step();
     }
 //    std::cout << "Hornets have stepped. Hornets left: " << hornets.size() << "\n";
     for(Flower* flower : flowers){

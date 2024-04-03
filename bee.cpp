@@ -84,50 +84,96 @@ void Bee::harvest() {
     }
 }
 
+void Bee::escape() {
+    double dx = this->closest->x - this->x;
+    double dy = this->closest->y - this->y;
+
+    double length = sqrt(dx * dx + dy * dy);
+    double dx_normalized = dx / length;
+    double dy_normalized = dy / length;
+
+    double stepX = -dx_normalized * this->speed;
+    double stepY = -dy_normalized * this->speed;
+
+    this->x += stepX;
+    this->y += stepY;
+
+    this->shape.move(stepX, stepY);
+}
+
+long Bee::danger_check() {
+    this->closest = world.hornets[0];
+    long min_range = get_distance(*this,*world.hornets[0]);
+    for(long i = 1;i<world.hornets.size();++i){
+        long curr = get_distance(*this,*world.hornets[i]);
+        if(curr<min_range){
+            this->closest = world.hornets[i];
+            min_range =curr;
+        }
+    }
+    return min_range;
+}
+
 void Bee::make_step() {
     std::cout<<"taken: "<<taken<<"\n";
-    if ((this->taken >= 10)or(inHive)) {
-        if (!inHive) {
+    if(this->indanger!=0){
+        this->indanger-=1;
+        escape();
+    }
+    else{
+        if(danger_check()<=75){
+            std::cout<<"!";
             this->shape.setRadius(10.f);
             this->shape.setFillColor(sf::Color::Yellow);
             this->shape.setOutlineThickness(0);
-            if (get_distance(*hive, *this) <= speed) {
-                inHive = set_status(*hive);
-                inGoal = false;
-            } else {
-                this->go_to(*hive);
-            }
-        }
-        else {
-            if (world.stepNumber % 2 == 0) {
-                if (taken > 0) {
-                    taken -= 1;
-                    hive->resourses += 1;
-                }
-                else{
-                    this->find_goal();
-                    inHive = false;
-                    shape.setRadius(10.f);
-                    shape.setFillColor(sf::Color::Yellow);
-                    shape.setOutlineThickness(0);
-                }
-            }
-        }
-    }
-    else if(!inGoal){
-        if(world.stepNumber % 10 == 0 || this->goal == nullptr){
-            this->find_goal();
-        }
-        if(get_distance(*goal, *this) <= speed){
-            inGoal = set_status(*goal);
+            this->inGoal=false;
+            this->indanger = 10;
         }
         else{
-            this->go_to(*goal);
-        }
-    }
-    else{
-        if(world.stepNumber % 10 == 0){
-            harvest();
+            if ((this->taken >= 10)or(inHive)) {
+                if (!inHive) {
+                    this->shape.setRadius(10.f);
+                    this->shape.setFillColor(sf::Color::Yellow);
+                    this->shape.setOutlineThickness(0);
+                    if (get_distance(*hive, *this) <= speed) {
+                        inHive = set_status(*hive);
+                        inGoal = false;
+                    } else {
+                        this->go_to(*hive);
+                    }
+                }
+                else {
+                    if (world.stepNumber % 2 == 0) {
+                        if (taken > 0) {
+                            taken -= 1;
+                            hive->resourses += 1;
+                        }
+                        else{
+                            this->find_goal();
+                            inHive = false;
+                            shape.setRadius(10.f);
+                            shape.setFillColor(sf::Color::Yellow);
+                            shape.setOutlineThickness(0);
+                        }
+                    }
+                }
+            }
+            else if(!inGoal){
+                if(world.stepNumber % 10 == 0 || this->goal == nullptr){
+                    this->find_goal();
+                }
+                if(get_distance(*goal, *this) <= speed){
+                    inGoal = set_status(*goal);
+                }
+                else{
+                    this->go_to(*goal);
+                }
+            }
+            else{
+                if(world.stepNumber % 10 == 0){
+                    harvest();
+                }
+            }
         }
     }
 }
@@ -143,10 +189,10 @@ Bee::~Bee(){
         goal->bee = nullptr;
     }
 
-    for(Hornet& hornet : world.hornets){
-        if(hornet.goal == this){
-            hornet.goal = nullptr;
-            hornet.find_goal();
+    for(Hornet* hornet : world.hornets){
+        if(hornet->goal == this){
+            hornet->goal = nullptr;
+            hornet->find_goal();
         }
     }
 }
