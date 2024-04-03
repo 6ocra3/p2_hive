@@ -30,7 +30,10 @@ void World::draw_world(sf::RenderWindow& window){
 void World::make_step(){
     stepNumber++;
     toAddFlowers.clear();
-//    std::cout << "Make step: " << stepNumber << "\n";
+    std::cout << "Make step: " << stepNumber << "\n";
+    if(stepNumber==50){
+        std::cout<<"1";
+    }
     for(Hive* hive:hives){
         hive->make_step();
     }

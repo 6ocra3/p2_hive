@@ -87,18 +87,19 @@ void Bee::harvest() {
 void Bee::make_step() {
     std::cout<<"taken: "<<taken<<"\n";
     if ((this->taken >= 10)or(inHive)) {
-        shape.setRadius(10.f);
-        shape.setFillColor(sf::Color::Yellow);
-        shape.setOutlineThickness(0);
         if (!inHive) {
+            this->shape.setRadius(10.f);
+            this->shape.setFillColor(sf::Color::Yellow);
+            this->shape.setOutlineThickness(0);
             if (get_distance(*hive, *this) <= speed) {
                 inHive = set_status(*hive);
+                inGoal = false;
             } else {
                 this->go_to(*hive);
             }
         }
         else {
-            if (world.stepNumber % 5 == 0) {
+            if (world.stepNumber % 2 == 0) {
                 if (taken > 0) {
                     taken -= 1;
                     hive->resourses += 1;

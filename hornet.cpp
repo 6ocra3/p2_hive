@@ -40,7 +40,7 @@ void Hornet::go_to(Entity &first) {
 void Hornet::make_step() {
     if((this->taken>=10)or(this->inhive)){
         if(inhive){
-            if (world.stepNumber % 5 == 0) {
+            if (world.stepNumber % 2 == 0) {
                 if (this->taken > 0) {
                     taken -= 1;
                     hive->resourses+=1;
@@ -49,7 +49,7 @@ void Hornet::make_step() {
                     this->find_goal();
                     this->inhive = false;
                     shape.setRadius(10.f);
-                    shape.setFillColor(sf::Color::Yellow);
+                    shape.setFillColor(sf::Color::Red);
                     shape.setOutlineThickness(0);
                 }
             }
@@ -57,6 +57,9 @@ void Hornet::make_step() {
         else{
             if(get_distance(*this,*hive)<=speed){
                 inhive = true;
+                shape.setRadius(10.f);
+                shape.setFillColor(sf::Color::Red);
+                shape.setOutlineThickness(0);
             }
             else{
                 this->go_to(*hive);
