@@ -11,8 +11,9 @@
 #include "hive.h"
 class Beehive: public Hive{
 public:
-    void spawn() override;
     Beehive(double x, double y, double speed, World& world,sf::Color color,int needed);
+private:
+    void spawn() override;
 };
 
 

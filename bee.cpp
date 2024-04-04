@@ -42,9 +42,8 @@ void Bee::find_goal(){
 }
 
 bool Bee::set_status(Entity& first) {
-    this->x = first.x;
-    this->y = first.y;
-    shape.setPosition(this->x, this->y);
+    setX(first.getX());
+    setY(first.getY());
     shape.setRadius(10.f);
     shape.setFillColor(sf::Color::Transparent);
     shape.setOutlineThickness(2.5f);
@@ -67,24 +66,6 @@ void Bee::harvest() {
         this->shape.setFillColor(sf::Color::Yellow);
         this->shape.setOutlineThickness(0);
     }
-}
-
-void Bee::escape() {
-//    long a = danger_check();
-    double dx = this->closest->x - this->x;
-    double dy = this->closest->y - this->y;
-
-    double length = sqrt(dx * dx + dy * dy);
-    double dx_normalized = dx / length;
-    double dy_normalized = dy / length;
-
-    double stepX = -dx_normalized * this->speed;
-    double stepY = -dy_normalized * this->speed;
-
-    this->x += stepX;
-    this->y += stepY;
-
-    this->shape.move(stepX, stepY);
 }
 
 long Bee::danger_check() {
@@ -133,7 +114,7 @@ void Bee::make_step() {
                     if (world.stepNumber % 2 == 0) {
                         if (taken > 0) {
                             taken -= 1;
-                            hive->resourses += 1;
+                            hive->addResources(1);
                         }
                         else{
                             this->find_goal();
@@ -178,8 +159,8 @@ Bee::~Bee(){
     }
 
     for(Hornet* hornet : world.hornets){
-        if(hornet->goal == this){
-            hornet->goal = nullptr;
+        if(hornet->compare_goal(this)){
+            hornet->change_goal(nullptr);
             hornet->find_goal();
         }
     }

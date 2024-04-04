@@ -9,8 +9,9 @@
 #include "hive.h"
 #include "hornet.h"
 class Hornethive: public Hive{
-public:
+private:
     void spawn() override;
+public:
     Hornethive(double x, double y, double speed, World& world,sf::Color color,int needed);
 };
 #endif //P2_FOREST_15_03_24_HORNETHIVE_H
