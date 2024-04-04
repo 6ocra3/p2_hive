@@ -8,69 +8,74 @@
 #include "beehive.h"
 #include "hornethive.h"
 #include "iostream"
+ int seed;
+
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(640, 480), "SFML Application");
+    for(int i = 0; i<1000;i++){
+        seed = i
+        sf::RenderWindow window(sf::VideoMode(640, 480), "SFML Application");
 
-    World world(640, 480);
+        World world(640, 480);
 
-    int x = randint(40, 600);
-    int y = randint(40, 440);
-    double speed = 0;
-    Hive* bhive = new Beehive(x,y,speed,world,sf::Color::Cyan,10);
-    world.hives.push_back(bhive);
-
-    x = randint(40, 600);
-    y = randint(40, 440);
-    speed = 0;
-    Hive* horthive = new Hornethive(x,y,speed,world,sf::Color::Magenta,10);
-    world.hives.push_back(horthive);
-
-    for(int i = 0; i<35;i++){
         int x = randint(40, 600);
         int y = randint(40, 440);
-        int speed = 0;
-        Flower* flower = new Flower(x, y, speed, world);
-        world.flowers.push_back(flower);
-    }
-    for(int i = 0; i<16;i++){
-        int x = randint(40, 600);
-        int y = randint(40, 440);
-        double speed = randint(1, 15) / 10 + 4;
-        Bee* bee = new Bee(x, y, speed, world,*bhive);
-        world.bees.push_back(bee);
-    }
+        double speed = 0;
+        Hive* bhive = new Beehive(x,y,speed,world,sf::Color::Cyan,10);
+        world.hives.push_back(bhive);
 
-    for(int i = 0; i<5;i++){
-        int x = randint(40, 600);
-        int y = randint(40, 440);
-        double speed = randint(1, 15) / 10 + 5;
-        Hornet* hornet= new Hornet(x, y, speed, world,*horthive);
-        world.hornets.push_back(hornet);
-    }
+        x = randint(40, 600);
+        y = randint(40, 440);
+        speed = 0;
+        Hive* horthive = new Hornethive(x,y,speed,world,sf::Color::Magenta,10);
+        world.hives.push_back(horthive);
 
-
-
-    sf::Clock clock;
-
-    while (window.isOpen())
-    {
-        sf::Event event;
-
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
+        for(int i = 0; i<35;i++){
+            int x = randint(40, 600);
+            int y = randint(40, 440);
+            int speed = 0;
+            Flower* flower = new Flower(x, y, speed, world);
+            world.flowers.push_back(flower);
+        }
+        for(int i = 0; i<16;i++){
+            int x = randint(40, 600);
+            int y = randint(40, 440);
+            double speed = randint(1, 10) / 10 + 4;
+            Bee* bee = new Bee(x, y, speed, world,*bhive);
+            world.bees.push_back(bee);
         }
 
-        if (clock.getElapsedTime().asSeconds() >= 0.006f)
-        {
-            world.make_step();
-            clock.restart();
+        for(int i = 0; i<5;i++){
+            int x = randint(40, 600);
+            int y = randint(40, 440);
+            double speed = randint(1, 10) / 10 + 5.7;
+            Hornet* hornet= new Hornet(x, y, speed, world,*horthive);
+            world.hornets.push_back(hornet);
         }
 
-        window.clear();
-        world.draw_world(window);
-        window.display();
+
+
+        sf::Clock clock;
+
+        while (window.isOpen())
+        {
+            sf::Event event;
+
+            while (window.pollEvent(event))
+            {
+                if (event.type == sf::Event::Closed)
+                    window.close();
+            }
+
+            if (clock.getElapsedTime().asSeconds() >= 0.00000001f)
+            {
+                world.make_step();
+                clock.restart();
+            }
+
+            window.clear();
+            world.draw_world(window);
+            window.display();
+        }
     }
 }

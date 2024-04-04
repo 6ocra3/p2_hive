@@ -26,6 +26,10 @@ public:
     long danger_check();
     ~Bee();
 
+    bool get_hive(){
+        return inHive;
+    };
+
     void change_closest(Hornet* newClosest){
         this->closest = newClosest;
         if(newClosest == nullptr){

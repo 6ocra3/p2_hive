@@ -31,6 +31,9 @@ public:
     long get_starve(){
         return starve;
     }
+    void set_starve(long x){
+        this->starve = x;
+    }
 };
 
 #endif //P2_FOREST_15_03_24_HORNET_H

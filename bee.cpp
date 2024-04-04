@@ -83,13 +83,13 @@ long Bee::danger_check() {
 
 void Bee::make_step() {
 
-    if(this->indanger!=0){
+    if((this->indanger!=0)and(this->inHive== false)){
         this->indanger-=1;
 //        long a = danger_check();
         go_to(*closest, -1);
     }
     else{
-        if(danger_check()<=75){
+        if((danger_check()<=75)and(this->inHive == false)){
             std::cout<<"!";
             this->shape.setRadius(10.f);
             this->shape.setFillColor(sf::Color::Yellow);
@@ -161,6 +161,7 @@ Bee::~Bee(){
     for(Hornet* hornet : world.hornets){
         if(hornet->compare_goal(this)){
             hornet->change_goal(nullptr);
+            hornet->set_starve(hornet->get_starve()/1.5);
             hornet->find_goal();
         }
     }

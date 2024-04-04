@@ -38,7 +38,7 @@ void Hornet::find_goal(){
 //}
 
 void Hornet::make_step() {
-    if(this->starve < 85){
+    if(this->starve < 110){
         if((this->taken>=10)or(this->inhive)){
             if(inhive){
                 if (world.stepNumber % 2 == 0) {
@@ -59,9 +59,12 @@ void Hornet::make_step() {
             else{
                 if(get_distance(*this,*hive)<=speed){
                     inhive = true;
+                    setX(hive->getX());
+                    setY(hive->getY());
                     shape.setRadius(10.f);
-                    shape.setFillColor(sf::Color::Red);
-                    shape.setOutlineThickness(0);
+                    shape.setFillColor(sf::Color::Transparent);
+                    shape.setOutlineThickness(2.5f);
+                    shape.setOutlineColor(sf::Color::Red);
                 }
                 else{
                     this->go_to(*hive);
@@ -70,7 +73,11 @@ void Hornet::make_step() {
         }
         else{
             this->find_goal();
-            if(get_distance(*this, *goal) < 15){
+            if((get_distance(*this, *goal) < 15)and(goal->get_hive()== true)){
+                this->starve-=2;
+            }
+            else if(get_distance(*this, *goal) < 15){
+                this->starve-=2;
                 stepAttacks++;
             }
             else{
@@ -80,6 +87,7 @@ void Hornet::make_step() {
                 this->taken+=10;
                 world.removeBee(goal);
                 this->starve=0;
+                this->go_to(*goal);
             }
             this->go_to(*goal);
             this->starve+=2;

@@ -11,7 +11,7 @@ World::World(int width, int height): stepNumber(0), width(width), height(height)
 
 void World::check_starvation() {
     for(Hornet* hornet : hornets){
-        if(hornet->get_starve()>=85){
+        if(hornet->get_starve()>=110){
             graduating_list.push_back(hornet);
         }
     }
