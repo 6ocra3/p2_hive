@@ -1,9 +1,11 @@
-#include "bee.h"
-#include "flower.h"
-#include "entity.h"
+#include "../bee/bee.h"
+#include "../flower/flower.h"
+#include "../entity/entity.h"
 #include <random>
 #include "world.h"
 #include "globals.h"
+
+inline long arr[10]= {0,17, 114,126,134,140,154,159,163,200};
 
 inline double get_distance(Entity& first, Entity& second){
     double dx = fabs(first.getX() - second.getX());

@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
-#include "entity.h"
-#include "hive.h"
-#include "hornet.h"
+#include "../entity/entity.h"
+#include "../hive/hive.h"
+#include "../hornet/hornet.h"
 
 class World;
 class Flower;

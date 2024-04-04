@@ -2,7 +2,7 @@
 // Created by Макар Кряжев on 10.02.2024.
 //
 #include <SFML/Graphics.hpp>
-#include "entity.h"
+#include "../entity/entity.h"
 class World;
 class Bee;
 #ifndef P2_FOREST_15_03_24_FLOWERS_H

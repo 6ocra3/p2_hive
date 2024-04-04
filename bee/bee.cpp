@@ -1,11 +1,11 @@
 #include "bee.h"
-#include "flower.h"
-#include "world.h"
-#include "utils.cpp"
-#include "entity.h"
+#include "../flower/flower.h"
+#include "../others/world.h"
+#include "../others/utils.cpp"
+#include "../entity/entity.h"
 #include <iostream>
 #include "vector"
-#include "beehive.h"
+#include "../hive/beehive.h"
 Bee::Bee(double x, double y, double speed, World& world,Hive& hive): Entity(x, y, speed, world, sf::Color::Yellow), goal(nullptr), taken(0), inGoal(
         false),inHive(false),hive(&hive){}
 

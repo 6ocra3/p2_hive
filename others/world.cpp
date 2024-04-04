@@ -1,7 +1,7 @@
 #include "world.h"
-#include "flower.h"
-#include "bee.h"
-#include "hornet.h"
+#include "../flower/flower.h"
+#include "../bee/bee.h"
+#include "../hornet/hornet.h"
 #include <algorithm>
 #include "iostream"
 
@@ -11,7 +11,7 @@ World::World(int width, int height): stepNumber(0), width(width), height(height)
 
 void World::check_starvation() {
     for(Hornet* hornet : hornets){
-        if(hornet->get_starve()>=110){
+        if(hornet->get_starve()>=150){
             graduating_list.push_back(hornet);
         }
     }

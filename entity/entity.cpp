@@ -1,6 +1,6 @@
 #include "entity.h"
 #include <SFML/Graphics.hpp>
-#include "world.h"
+#include "../others/world.h"
 #include "math.h"
 
 Entity::Entity(double x, double y, double speed, World &world, sf::Color color): x(x), y(y), speed(speed),  world(world) {

@@ -1,8 +1,8 @@
-#include "bee.h"
+#include "../bee/bee.h"
 #include "hornet.h"
-#include "world.h"
-#include "utils.cpp"
-#include "entity.h"
+#include "../others/world.h"
+#include "../others/utils.cpp"
+#include "../entity/entity.h"
 #include "iostream"
 
 Hornet::Hornet(double x, double y, double speed, World& world,Hive& hive): Entity(x, y, speed, world, sf::Color::Red), goal(nullptr), stepAttacks(0)
@@ -39,7 +39,7 @@ void Hornet::find_goal(){
 //}
 
 void Hornet::make_step() {
-    if(this->starve < 110){
+    if(this->starve < 150){
         if((this->taken>=10)or(this->inhive)){
             if(inhive){
                 if (world.stepNumber % 2 == 0) {

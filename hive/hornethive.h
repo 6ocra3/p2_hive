@@ -3,12 +3,12 @@
 //
 #ifndef P2_FOREST_15_03_24_HORNETHIVE_H
 #define P2_FOREST_15_03_24_HORNETHIVE_H
-#include "world.h"
-#include "entity.h"
+#include "../others/world.h"
+#include "../entity/entity.h"
 #include <iostream>
 #include "hive.h"
-#include "hornet.h"
-#include "globals.h"
+#include "../hornet/hornet.h"
+#include "../others/globals.h"
 class Hornethive: public Hive{
 private:
     void spawn() override;
