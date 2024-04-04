@@ -114,7 +114,7 @@ void Bee::make_step() {
                     if (world.stepNumber % 2 == 0) {
                         if (taken > 0) {
                             taken -= 1;
-                            hive->resourses += 1;
+                            hive->addResources(1);
                         }
                         else{
                             this->find_goal();
@@ -159,8 +159,8 @@ Bee::~Bee(){
     }
 
     for(Hornet* hornet : world.hornets){
-        if(hornet->goal == this){
-            hornet->goal = nullptr;
+        if(hornet->compare_goal(this)){
+            hornet->change_goal(nullptr);
             hornet->find_goal();
         }
     }

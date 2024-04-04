@@ -11,12 +11,13 @@
 #include "hive.h"
 class Beehive: public Hive{
 public:
+    Beehive(double x, double y, double speed, World& world,sf::Color color,int needed);
+private:
     void spawn() override{
         Bee* bee = new Bee(getX(), getY(), 5, world, *this);
         world.bees.push_back(bee);
     }
 
-    Beehive(double x, double y, double speed, World& world,sf::Color color,int needed);
 };
 
 

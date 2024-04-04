@@ -9,22 +9,32 @@ class Flower;
 #define P2_FOREST_15_03_24_BEE_H
 
 class Bee : public Entity{
-public:
+private:
     Flower* goal;
     bool inGoal;
     int taken;
     bool inHive;
-    Bee(double x, double y, double speed, World& world,Hive& hive);
+    long indanger = 0;
     Hive* hive;
     Hornet* closest;
+public:
+    Bee(double x, double y, double speed, World& world,Hive& hive);
     void make_step() override;
     void find_goal();
     bool set_status(Entity& first);
     void harvest();
-    void escape();
     long danger_check();
-    long indanger = 0;
     ~Bee();
+
+    void change_closest(Hornet* newClosest){
+        this->closest = newClosest;
+        if(newClosest == nullptr){
+            this->indanger = 0;
+        }
+    }
+    bool compare_closets(Hornet* newClosest){
+        return closest == newClosest;
+    }
 };
 
 #endif //P2_FOREST_15_03_24_BEE_H

@@ -44,7 +44,7 @@ void Hornet::make_step() {
                 if (world.stepNumber % 2 == 0) {
                     if (this->taken > 0) {
                         taken -= 1;
-                        hive->resourses+=1;
+                        hive->addResources(1);
                     }
                     if (taken == 0) {
                         this->find_goal();
@@ -97,9 +97,8 @@ Hornet::~Hornet(){
     }
 
     for(Bee* bee : world.bees){
-        if(bee->closest == this){
-            bee->closest= nullptr;
-            bee->indanger=0;
+        if(bee->compare_closets(this)){
+            bee->change_closest(nullptr);
         }
     }
 

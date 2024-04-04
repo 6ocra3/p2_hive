@@ -10,11 +10,12 @@
 #include "hive.h"
 #include "hornet.h"
 class Hornethive: public Hive{
-public:
+private:
     void spawn() override{
         Hornet* hornet = new Hornet(getX(), getY(), 10, world, *this);
         world.hornets.push_back(hornet);
     }
+public:
     Hornethive(double x, double y, double speed, World& world,sf::Color color,int needed);
 };
 #endif //P2_FOREST_15_03_24_HORNETHIVE_H
