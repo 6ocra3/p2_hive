@@ -27,14 +27,15 @@ void Entity::go_to(Entity &target, int pos) {
     double stepX = dx_normalized * this->speed * pos;
     double stepY = dy_normalized * this->speed * pos;
 
-    this->x += stepX;
-    if (this->x < 0) this->x += world.width;
-    if (this->x >= world.width) this->x -= world.width;
+    double newX = this->x + stepX;
+    if (this->x < 0) newX += world.width;
+    if (this->x >= world.width) newX -= world.width;
 
-    this->y += stepY;
-    if (this->y < 0) this->y += world.height;
-    if (this->y >= world.height) this->y -= world.height;
+    double newY = this->y + stepY;
+    if (this->y < 0) newY += world.height;
+    if (this->y >= world.height) newY -= world.height;
 
-    this->shape.setPosition(this->x, this->y);
+    this->setX(newX);
+    this->setY(newY);
 
 }

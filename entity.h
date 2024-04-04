@@ -6,9 +6,10 @@ class World; // Предварительное объявление класса
 #define P2_FOREST_15_03_24_ENTITY_H
 
 class Entity {
-public:
+private:
     double x;
     double y;
+public:
     double speed;
     World& world;
     sf::CircleShape shape;
@@ -18,7 +19,19 @@ public:
 
     virtual void make_step() = 0;
 
-    virtual ~Entity() {}
+    virtual ~Entity()=default;
+
+    double getX() {return x;};
+    double getY() {return y;};
+
+    void setX(double x) {
+        this->x = x;
+        this->shape.setPosition(this->x, this->y);
+    };
+    void setY(double y) {
+        this->y = y;
+        this->shape.setPosition(this->x, this->y);
+    };
 };
 
 #endif //P2_FOREST_15_03_24_ENTITY_H

@@ -18,10 +18,10 @@ void Flower::make_step() {
                 int xDif = randint(1, 200) - 100;
                 int yDif = randint(1, 200) - 100;
                 int tooClose = 0;
-                if(x+xDif < 10 || x+xDif > world.width-10 || y+yDif<10 || y+yDif>world.height-10 ){
+                if(getX()+xDif < 10 || getX()+xDif > world.width-10 || getY()+yDif<10 || getY()+yDif>world.height-10 ){
                     continue;
                 }
-                Flower *flower = new Flower(x + xDif, y + yDif, 0, world);
+                Flower *flower = new Flower(getX() + xDif, getY() + yDif, 0, world);
                 for (Flower *existFlower: world.flowers) {
                     if (get_distance(*existFlower, *flower) < 20) {
                         tooClose = 1;
