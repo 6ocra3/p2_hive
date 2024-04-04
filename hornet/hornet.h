@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "entity.h"
+#include "../entity/entity.h"
 
 class World;
 class Bee;

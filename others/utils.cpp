@@ -1,6 +1,6 @@
-#include "bee.h"
-#include "flower.h"
-#include "entity.h"
+#include "../bee/bee.h"
+#include "../flower/flower.h"
+#include "../entity/entity.h"
 #include <random>
 #include "world.h"
 #include "globals.h"

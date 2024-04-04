@@ -1,7 +1,7 @@
 #include "world.h"
-#include "flower.h"
-#include "bee.h"
-#include "hornet.h"
+#include "../flower/flower.h"
+#include "../bee/bee.h"
+#include "../hornet/hornet.h"
 #include <algorithm>
 #include "iostream"
 

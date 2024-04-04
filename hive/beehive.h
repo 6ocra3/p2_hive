@@ -5,8 +5,8 @@
 #ifndef P2_FOREST_15_03_24_BEEHIVE_H
 #define P2_FOREST_15_03_24_BEEHIVE_H
 
-#include "world.h"
-#include "entity.h"
+#include "../others/world.h"
+#include "../entity/entity.h"
 #include <iostream>
 #include "hive.h"
 class Beehive: public Hive{

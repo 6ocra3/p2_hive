@@ -1,9 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include "flower.h"
-#include "bee.h"
-#include "hornet.h"
-#include "hive.h"
+#include "../flower/flower.h"
+#include "../bee/bee.h"
+#include "../hornet/hornet.h"
+#include "../hive/hive.h"
 #ifndef P2_FOREST_15_03_24_WORLD_H
 #define P2_FOREST_15_03_24_WORLD_H
 

@@ -1,19 +1,19 @@
 #include <SFML/Graphics.hpp>
-#include "flower.h"
-#include "bee.h"
-#include "world.h"
-#include "hornet.h"
+#include "flower/flower.h"
+#include "bee/bee.h"
+#include "others/world.h"
+#include "hornet/hornet.h"
 #include <vector>
-#include "utils.cpp"
-#include "beehive.h"
-#include "hornethive.h"
+#include "others/utils.cpp"
+#include "hive/beehive.h"
+#include "hive/hornethive.h"
 #include "iostream"
-#include "globals.h"
+#include "others/globals.h"
 std::vector<long> vec;
 int main()
 {
     long step = 0;
-    for(int i = 1000; i<2000;i++){
+    for(int i = 43; i<2000;i++){
         step=0;
 
         global_gen = i;
@@ -63,7 +63,7 @@ int main()
         while (window.isOpen())
         {
             sf::Event event;
-            float stepInterval= 0.0000000001f;
+            float stepInterval= 0.04f;
             while (window.pollEvent(event))
             {
                 if (event.type == sf::Event::Closed)
@@ -81,7 +81,7 @@ int main()
                 }
                 else if (event.key.code == sf::Keyboard::F1)
                 {
-                    stepInterval = 0.04f;
+                    stepInterval = 0.3f;
                 }
             }
             if (clock.getElapsedTime().asSeconds() >= stepInterval)
@@ -104,12 +104,7 @@ int main()
             std::cout<<"\n!!!!!!!!!! "<<i<<": "<<step;
         }
         else{
-//            std::cout<<"\n"<<i<<": "<<step;
+            std::cout<<"\n"<<i<<": "<<step;
         }
     }
 }
-//!!!!!!!!!! 43: 4808      0.0000000001f, 4, 4.5
-//!!!!!!!!!! 74: 3204       40 15 5
-//!!!!!!!!!! 101: 4254
-//!!!!!!!!!! 137: 3204
-//!!!!!!!!!! 142: 3454

@@ -5,7 +5,7 @@
 #ifndef P2_FOREST_15_03_24_HIVE_H
 #define P2_FOREST_15_03_24_HIVE_H
 #include <SFML/Graphics.hpp>
-#include "entity.h"
+#include "../entity/entity.h"
 
 class World;
 class Hive: public Entity{
