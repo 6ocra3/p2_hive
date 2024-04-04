@@ -15,6 +15,7 @@ public:
     std::vector< Flower* > flowers;
     std::vector< Bee* > bees;
     std::vector< Hornet* > hornets;
+    std::vector<Hornet*>graduating_list;
     int stepNumber;
     std::vector< Hive* > hives;
     int width;
@@ -24,6 +25,7 @@ public:
     void make_step();
     void removeBee(Bee* bee);
     void removeHornet(Hornet* hornet);
+    void check_starvation();
 };
 
 #endif //P2_FOREST_15_03_24_WORLD_H

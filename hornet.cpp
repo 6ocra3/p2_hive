@@ -38,7 +38,7 @@ void Hornet::find_goal(){
 //}
 
 void Hornet::make_step() {
-    if(this->starve < 80){
+    if(this->starve < 85){
         if((this->taken>=10)or(this->inhive)){
             if(inhive){
                 if (world.stepNumber % 2 == 0) {
@@ -84,9 +84,6 @@ void Hornet::make_step() {
             this->go_to(*goal);
             this->starve+=2;
         }
-    }
-    else{
-        world.removeHornet(this);
     }
 }
 

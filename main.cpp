@@ -36,8 +36,7 @@ int main()
     for(int i = 0; i<16;i++){
         int x = randint(40, 600);
         int y = randint(40, 440);
-        double speed = randint(1, 8) / 10 + 1;
-        speed = 6;
+        double speed = randint(1, 15) / 10 + 4;
         Bee* bee = new Bee(x, y, speed, world,*bhive);
         world.bees.push_back(bee);
     }
@@ -45,8 +44,7 @@ int main()
     for(int i = 0; i<5;i++){
         int x = randint(40, 600);
         int y = randint(40, 440);
-        double speed = randint(1, 8) / 10 + 0.6;
-        speed = 6.5;
+        double speed = randint(1, 15) / 10 + 5;
         Hornet* hornet= new Hornet(x, y, speed, world,*horthive);
         world.hornets.push_back(hornet);
     }

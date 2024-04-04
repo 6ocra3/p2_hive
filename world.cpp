@@ -9,6 +9,14 @@ World::World(int width, int height): stepNumber(0), width(width), height(height)
 
 }
 
+void World::check_starvation() {
+    for(Hornet* hornet : hornets){
+        if(hornet->starve>=85){
+            graduating_list.push_back(hornet);
+        }
+    }
+}
+
 void World::draw_world(sf::RenderWindow& window){
     for(Hive* hive:hives){
         window.draw(hive->shape);
@@ -31,7 +39,7 @@ void World::make_step(){
     stepNumber++;
     toAddFlowers.clear();
     std::cout << "Make step: " << stepNumber << "\n";
-    if(stepNumber==490){
+    if(stepNumber==370){
         std::cout<<"1";
     }
     for(Hive* hive:hives){
@@ -45,13 +53,16 @@ void World::make_step(){
     for(Bee* bee : bees){
         bee->make_step();
     }
-//
-//    for(int i = 0; i<hornets.size();i++){
-//        hornets[i]->make_step();
-//    }
+
     for(Hornet* hornet : hornets){
         hornet->make_step();
     }
+
+    check_starvation();
+    for(Hornet* hornet:graduating_list){
+        removeHornet(hornet);
+    }
+    graduating_list.clear();
 //    std::cout << "Bees have stepped. Bees left: " << bees.size() << "\n";
 
 //    std::cout << "Hornets have stepped. Hornets left: " << hornets.size() << "\n";
@@ -65,7 +76,7 @@ void World::make_step(){
     for(Flower* flower : toAddFlowers){
         flowers.push_back(flower);
     }
-//    std::cout << "Flowers have been added. Flowers after add: " << flowers.size() << "\n";
+    std::cout << "Number of hornets: " << hornets.size() << "\n";
 //    std::cout << stepNumber << " Step finished\n\n\n";
 }
 
