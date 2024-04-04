@@ -8,6 +8,7 @@
 #include <iostream>
 #include "hive.h"
 #include "hornet.h"
+#include "globals.h"
 class Hornethive: public Hive{
 private:
     void spawn() override;

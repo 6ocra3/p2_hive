@@ -90,7 +90,7 @@ void Bee::make_step() {
     }
     else{
         if((danger_check()<=75)and(this->inHive == false)){
-            std::cout<<"!";
+//            std::cout<<"!";
             this->shape.setRadius(10.f);
             this->shape.setFillColor(sf::Color::Yellow);
             this->shape.setOutlineThickness(0);

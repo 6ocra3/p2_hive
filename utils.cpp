@@ -3,6 +3,7 @@
 #include "entity.h"
 #include <random>
 #include "world.h"
+#include "globals.h"
 
 inline double get_distance(Entity& first, Entity& second){
     double dx = fabs(first.getX() - second.getX());
@@ -19,10 +20,11 @@ inline double get_distance(Entity& first, Entity& second){
 }
 
 inline int randint(int start, int end){
-    std::random_device rd;
+//    std::random_device rd;
+//    std::default_random_engine generator(global_gen);
 //    static std::mt19937 gen(rd());
-    static std::mt19937 gen(2);
+    static std::mt19937 gen(global_gen);
 
     std::uniform_int_distribution<> distrib(start, end);
-    return distrib(gen); // Используем глобальный генератор
+    return distrib(gen);
 }

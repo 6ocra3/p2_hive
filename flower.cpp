@@ -2,7 +2,7 @@
 #include "entity.h"
 #include "world.h"
 #include "utils.cpp"
-
+#include "globals.h"
 Flower::Flower(double x, double y, double speed, World &world) : greenCnt(100),
                                                                  Entity(x, y, speed, world, sf::Color(0, 100, 0)),
                                                                  capacity(1), busy(
@@ -28,7 +28,7 @@ void Flower::make_step() {
                         break;
                     }
                 }
-                if (tooClose) {
+                if ((tooClose)or(world.flowers.size()>=80)) {
                     continue;
                 }
                 capacity = 1;

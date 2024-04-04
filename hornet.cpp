@@ -4,6 +4,7 @@
 #include "utils.cpp"
 #include "entity.h"
 #include "iostream"
+
 Hornet::Hornet(double x, double y, double speed, World& world,Hive& hive): Entity(x, y, speed, world, sf::Color::Red), goal(nullptr), stepAttacks(0)
 ,inhive(false),taken(0),hive(&hive){
 
@@ -79,17 +80,17 @@ void Hornet::make_step() {
             else if(get_distance(*this, *goal) < 15){
                 this->starve-=2;
                 stepAttacks++;
+                this->go_to(*goal);
             }
             else{
                 stepAttacks = 0;
+                this->go_to(*goal);
             }
             if(stepAttacks == 10){
                 this->taken+=10;
                 world.removeBee(goal);
                 this->starve=0;
-                this->go_to(*goal);
             }
-            this->go_to(*goal);
             this->starve+=2;
         }
     }
